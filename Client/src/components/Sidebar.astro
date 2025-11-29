@@ -4,12 +4,14 @@ interface Props {
   navLinks?: Array<{ href: string; label: string }>;
 }
 
-const { navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/docs', label: 'Documentation' },
-  { href: '/blog', label: 'Blog' },
-] } = Astro.props;
+const {
+  navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/docs', label: 'Documentation' },
+    { href: '/blog', label: 'Blog' },
+  ],
+} = Astro.props;
 ---
 
 <aside class="w-64 bg-gray-100 border-r border-gray-300 h-full overflow-y-auto">
