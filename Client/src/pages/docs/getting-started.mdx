@@ -1,0 +1,91 @@
+---
+layout: ../../layouts/Layout.astro
+title: 'Documentation - Getting Started'
+description: 'Getting started with Iron Ambit'
+---
+
+# Getting Started with Iron Ambit
+
+Welcome to the Iron Ambit documentation! This guide will help you get up and running.
+
+## Installation
+
+To get started with this project, you'll need:
+
+1. **Node.js** (v18 or higher)
+2. **npm** or **pnpm** package manager
+
+## Project Structure
+
+```
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   ├── Header.astro
+│   │   ├── Sidebar.astro
+│   │   ├── Footer.astro
+│   │   └── Counter.tsx
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   └── about.astro
+│   └── styles/
+│       └── global.css
+└── package.json
+```
+
+## Development
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Your site will be available at `http://localhost:4321`
+
+## Building for Production
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Key Features
+
+### Tailwind CSS
+
+All components use Tailwind CSS utility classes for styling. You can customize the theme in `tailwind.config.js`.
+
+### React Components
+
+React components can be used alongside Astro components. Use the `client:` directive to control hydration:
+
+- `client:load` - Hydrate immediately on page load
+- `client:idle` - Hydrate when browser is idle
+- `client:visible` - Hydrate when component is visible
+
+### MDX Support
+
+Write your documentation in MDX format to combine Markdown with React components.
+
+## Next Steps
+
+- Explore the component library
+- Customize the theme
+- Add more pages
+- Deploy your site
+
+---
+
+*Built with ❤️ by Hallcrest Engineering, 2025*

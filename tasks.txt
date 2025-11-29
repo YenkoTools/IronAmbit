@@ -3,3 +3,20 @@ Iron Ambit Task List
 (1) Add git-tag script
 
 (2) Add version script
+
+(3) Generate a changelist
+
+(4) Create new AstroJs webapp
+
+I want to create a new AstroJs in the Client directory.  
+- I have installed the latest version of nodejs.
+- I have installed the Astrojs tooling.
+- I want the new AstroJs webapp to support Tailwind CSS
+- I want the new astroJs webapp to support React components.
+- I want to support rendering of markdown documents.
+
+Layout
+- I want a layout with the following:
+Header 
+Sidebar for navigation links
+Footer with copywrite "Hallcrest Engineering, 2025"
