@@ -1,10 +1,12 @@
 ---
 // Sidebar component
+// biome-ignore lint/correctness/noUnusedVariables: Props interface is used by Astro
 interface Props {
   navLinks?: Array<{ href: string; label: string }>;
 }
 
 const {
+  // biome-ignore lint/correctness/noUnusedVariables: Used in template
   navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },

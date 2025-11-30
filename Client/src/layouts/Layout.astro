@@ -1,14 +1,19 @@
 ---
-import Header from '../components/Header.astro';
-import Sidebar from '../components/Sidebar.astro';
+// biome-ignore lint/correctness/noUnusedImports: Used in template
 import Footer from '../components/Footer.astro';
+// biome-ignore lint/correctness/noUnusedImports: Used in template
+import Header from '../components/Header.astro';
+// biome-ignore lint/correctness/noUnusedImports: Used in template
+import Sidebar from '../components/Sidebar.astro';
 import '../styles/global.css';
 
+// biome-ignore lint/correctness/noUnusedVariables: Props interface used by Astro
 interface Props {
   title?: string;
   description?: string;
 }
 
+// biome-ignore lint/correctness/noUnusedVariables: Variables used in template
 const { title = 'Iron Ambit', description = 'Welcome to Iron Ambit' } = Astro.props;
 ---
 
