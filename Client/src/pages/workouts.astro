@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WorkoutsTable from '../components/WorkoutsTable';
+---
+
+<Layout title="Workout Management - IronAmbit">
+  <main class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Workout Management</h1>
+      <p class="text-gray-600">Track and manage daily workouts for all users</p>
+    </div>
+    
+    <WorkoutsTable client:load />
+  </main>
+</Layout>
