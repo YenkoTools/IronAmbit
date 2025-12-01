@@ -1,15 +1,22 @@
 ---
 // Sidebar component
+// biome-ignore lint/correctness/noUnusedVariables: Props interface is used by Astro
 interface Props {
   navLinks?: Array<{ href: string; label: string }>;
 }
 
-const { navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/docs', label: 'Documentation' },
-  { href: '/blog', label: 'Blog' },
-] } = Astro.props;
+const {
+  // biome-ignore lint/correctness/noUnusedVariables: Used in template
+  navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/users', label: 'Users' },
+    { href: '/exercises', label: 'Exercises' },
+    { href: '/workouts', label: 'Workouts' },
+    { href: '/about', label: 'About' },
+    { href: '/docs', label: 'Documentation' },
+    { href: '/blog', label: 'Blog' },
+  ],
+} = Astro.props;
 ---
 
 <aside class="w-64 bg-gray-100 border-r border-gray-300 h-full overflow-y-auto">
@@ -28,3 +35,4 @@ const { navLinks = [
     </ul>
   </nav>
 </aside>
+

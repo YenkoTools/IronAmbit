@@ -1,28 +1,32 @@
 ---
-import Header from '../components/Header.astro';
-import Sidebar from '../components/Sidebar.astro';
+// biome-ignore lint/correctness/noUnusedImports: Used in template
 import Footer from '../components/Footer.astro';
+// biome-ignore lint/correctness/noUnusedImports: Used in template
+import Header from '../components/Header.astro';
+// biome-ignore lint/correctness/noUnusedImports: Used in template
+import Sidebar from '../components/Sidebar.astro';
 import '../styles/global.css';
 
+import { SITE_TITLE, SITE_DESCRIPTION  } from '../constants';
+
+// biome-ignore lint/correctness/noUnusedVariables: Props interface used by Astro
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
-  title = 'Iron Ambit', 
-  description = 'Welcome to Iron Ambit' 
-} = Astro.props;
+// biome-ignore lint/correctness/noUnusedVariables: Variables used in template
+const { title = 'Iron Ambit', description = 'Welcome to Iron Ambit' } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
+    <meta name="description" content={SITE_DESCRIPTION} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <title>{SITE_TITLE} - {title}</title>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
