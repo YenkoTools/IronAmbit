@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronAmbit Services</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1E293B;
+            background: linear-gradient(135deg, #F9ECD8 0%, #FFF 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #1C303F;
+            color: #F9ECD8;
+            padding: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        main {
+            flex: 1;
+            padding: 3rem 0;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .service-card h2 {
+            color: #1C303F;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        .endpoint {
+            background: #F1F5F9;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #1E293B;
+            word-break: break-all;
+        }
+
+        .status {
+            display: inline-block;
+            background: #10B981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #1C303F;
+            color: #F9ECD8;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+
+        .api-info {
+            background: white;
+            border-left: 4px solid #1C303F;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .api-info h2 {
+            color: #1C303F;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="/ironambit.svg" alt="IronAmbit Logo" class="logo">
+                <div>
+                    <h1>IronAmbit Services</h1>
+                    <p class="tagline">Robust API Services Built with .NET</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="api-info">
+                <h2>Welcome to IronAmbit API</h2>
+                <p>This service provides a comprehensive set of RESTful APIs built on .NET 10, following clean architecture principles.</p>
+                <p><span class="status">● ONLINE</span></p>
+            </div>
+
+            <h2 style="margin-bottom: 1rem; color: #1C303F;">Available Services</h2>
+            
+            <div class="services">
+                <div class="service-card">
+                    <h2>API Documentation</h2>
+                    <p>Interactive API documentation powered by Swagger/OpenAPI. Explore and test all available endpoints.</p>
+                    <div class="endpoint">/swagger</div>
+                </div>
+
+                <div class="service-card">
+                    <h2>Health Check</h2>
+                    <p>Monitor the service health status and dependencies. Useful for monitoring and load balancing.</p>
+                    <div class="endpoint">/health</div>
+                </div>
+
+                <div class="service-card">
+                    <h2>API Endpoints</h2>
+                    <p>RESTful API endpoints for your application. All endpoints follow REST best practices and return JSON responses.</p>
+                    <div class="endpoint">/api/*</div>
+                </div>
+
+                <div class="service-card">
+                    <h2>Metrics & Monitoring</h2>
+                    <p>Application performance metrics and logging integration with Serilog for comprehensive observability.</p>
+                    <div class="endpoint">/metrics</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h2 style="color: #1C303F; margin-bottom: 1rem;">Architecture</h2>
+                <p style="color: #475569; margin-bottom: 0.5rem;">This service is built using Clean Architecture with the following layers:</p>
+                <ul style="color: #475569; margin-left: 2rem;">
+                    <li><strong>Domain</strong> - Core business entities and logic</li>
+                    <li><strong>Application</strong> - Use cases and business rules</li>
+                    <li><strong>Infrastructure</strong> - Data access and external services</li>
+                    <li><strong>Api</strong> - RESTful API endpoints and presentation</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 IronAmbit. Hallcrest Engineering</p>
+        </div>
+    </footer>
+</body>
+</html>
