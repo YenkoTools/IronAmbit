@@ -1,7 +1,7 @@
 <div align="center">
   <img src="ironambit.svg" alt="IronAmbit Logo" width="200"/>
   
-  # IronAmbit
+  # Iron "Ambition"
 
   A modern workout tracking application with a .NET backend API and an AstroJs frontend.
 </div>
