@@ -22,6 +22,9 @@ builder.ConfigureCustomSerilog();
 
 var app = builder.Build();
 
+// Enable static files and default files
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
