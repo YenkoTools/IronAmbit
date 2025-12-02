@@ -1,6 +1,10 @@
-# IronAmbit
+<div align="center">
+  <img src="ironambit.svg" alt="IronAmbit Logo" width="200"/>
+  
+  # Iron "Ambition"
 
-A modern workout tracking application with a .NET backend API and an AstroJs frontend.
+  A modern workout tracking application with a .NET backend API and an AstroJs frontend.
+</div>
 
 ## 🏗️ Architecture
 
