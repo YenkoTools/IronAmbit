@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Infrastructure</PackageId>
+  </PropertyGroup>
+
+</Project>
