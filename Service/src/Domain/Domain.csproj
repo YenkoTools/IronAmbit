@@ -4,4 +4,8 @@
     <PackageId>Domain</PackageId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Ardalis.SmartEnum" />
+  </ItemGroup>
+
 </Project>
