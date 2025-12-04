@@ -1,5 +1,5 @@
 import DataTable, { type Column } from './DataTable';
-import { apiService } from '../utils/api';
+import { api } from '../utils/apiFactory';
 import type { Exercise } from '../types';
 
 /**
@@ -75,7 +75,7 @@ export default function ExercisesTable() {
   ];
 
   const fetchExercises = async (page: number, pageSize: number) => {
-    const response = await apiService.getPaginated<Exercise>('/exercises', page, pageSize);
+    const response = await api.getPaginatedExercises(page, pageSize);
     return {
       data: response.data,
       total: response.total,
