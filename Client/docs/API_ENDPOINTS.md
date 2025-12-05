@@ -3,6 +3,7 @@
 ## Base URL Configuration
 
 Set in `.env` file:
+
 ```env
 PUBLIC_API_URL=http://localhost:8080/api
 ```
@@ -12,11 +13,13 @@ PUBLIC_API_URL=http://localhost:8080/api
 ### Users Management
 
 #### List Users (Paginated)
+
 ```http
 GET /api/users?page=1&pageSize=10
 ```
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -40,11 +43,13 @@ GET /api/users?page=1&pageSize=10
 ### Exercise Management
 
 #### List Exercises (Paginated)
+
 ```http
 GET /api/exercises?page=1&pageSize=10
 ```
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -68,6 +73,7 @@ GET /api/exercises?page=1&pageSize=10
 ```
 
 **Difficulty Values:**
+
 - `"beginner"`
 - `"intermediate"`
 - `"advanced"`
@@ -75,11 +81,13 @@ GET /api/exercises?page=1&pageSize=10
 ### Workout Management
 
 #### List Workouts (Paginated)
+
 ```http
 GET /api/workouts?page=1&pageSize=10
 ```
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -107,6 +115,7 @@ GET /api/workouts?page=1&pageSize=10
 ```
 
 **Optional Fields:**
+
 - `userName` - If not provided, UI shows "User #{userId}"
 - `exerciseName` - If not provided, UI shows "Exercise #{exerciseId}"
 - `weight` - Can be null/undefined for bodyweight exercises
@@ -129,6 +138,7 @@ When an error occurs, return:
 ```
 
 **Common HTTP Status Codes:**
+
 - `200` - Success
 - `400` - Bad Request (invalid parameters)
 - `401` - Unauthorized
@@ -140,10 +150,10 @@ When an error occurs, return:
 
 ### Pagination (All Endpoints)
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `page` | integer | Yes | Page number (1-indexed) |
-| `pageSize` | integer | Yes | Items per page (5, 10, 25, 50, 100) |
+| Parameter  | Type    | Required | Description                         |
+| ---------- | ------- | -------- | ----------------------------------- |
+| `page`     | integer | Yes      | Page number (1-indexed)             |
+| `pageSize` | integer | Yes      | Items per page (5, 10, 25, 50, 100) |
 
 ### Example Queries
 
@@ -161,18 +171,21 @@ GET /api/workouts?page=1&pageSize=100
 ## Testing with cURL
 
 ### Get Users
+
 ```bash
 curl -X GET "http://localhost:8080/api/users?page=1&pageSize=10" \
   -H "Content-Type: application/json"
 ```
 
 ### Get Exercises
+
 ```bash
 curl -X GET "http://localhost:8080/api/exercises?page=1&pageSize=10" \
   -H "Content-Type: application/json"
 ```
 
 ### Get Workouts
+
 ```bash
 curl -X GET "http://localhost:8080/api/workouts?page=1&pageSize=10" \
   -H "Content-Type: application/json"
@@ -184,20 +197,24 @@ Your backend must allow requests from the Astro development server:
 
 ```javascript
 // Example: Node.js/Express
-app.use(cors({
-  origin: 'http://localhost:4321', // Astro dev server
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: 'http://localhost:4321', // Astro dev server
+    credentials: true,
+  })
+);
 ```
 
 ## Headers
 
 ### Required Request Headers
+
 ```
 Content-Type: application/json
 ```
 
 ### Optional Request Headers (for future auth)
+
 ```
 Authorization: Bearer <token>
 ```
@@ -205,11 +222,13 @@ Authorization: Bearer <token>
 ## Field Validation
 
 ### Users
+
 - `username`: 3-30 characters, alphanumeric + underscore
 - `email`: Valid email format
 - `firstName`, `lastName`: 1-50 characters
 
 ### Exercises
+
 - `name`: 1-100 characters, required
 - `description`: 1-500 characters
 - `category`: Non-empty string
@@ -217,6 +236,7 @@ Authorization: Bearer <token>
 - `difficulty`: One of: "beginner", "intermediate", "advanced"
 
 ### Workouts
+
 - `userId`: Valid user ID
 - `exerciseId`: Valid exercise ID
 - `date`: ISO date format (YYYY-MM-DD)
@@ -254,6 +274,7 @@ GET /api/workouts?page=1&pageSize=10&startDate=2024-01-01&endDate=2024-01-31
 ---
 
 **Need Help?**
+
 - See `API_INTEGRATION.md` for detailed implementation guide
 - Check `IMPLEMENTATION_SUMMARY.md` for architecture overview
 - Review `src/utils/mockApi.ts` for example data structures

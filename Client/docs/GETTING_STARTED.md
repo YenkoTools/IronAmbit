@@ -19,6 +19,7 @@ cp .env.example .env
 ```
 
 Edit `.env`:
+
 ```env
 # For development with mock data
 PUBLIC_API_URL=http://localhost:8080/api
@@ -32,6 +33,7 @@ npm install
 ```
 
 All required dependencies are already in `package.json`:
+
 - ✅ astro@^5.16.2
 - ✅ @astrojs/react@^4.4.2
 - ✅ react@^19.2.0
@@ -45,6 +47,7 @@ npm run dev
 ```
 
 Expected output:
+
 ```
 🚀 astro dev
   ┃ Local    http://localhost:4321/
@@ -70,18 +73,21 @@ Visit these URLs in your browser:
 ### 5. Expected Behavior
 
 #### With Mock Data (Default)
+
 ✅ Pages load immediately  
 ✅ Sample data displays  
 ✅ Pagination works  
 ✅ Loading spinner shows briefly  
-✅ No API errors  
+✅ No API errors
 
 #### Without Backend API
+
 ⚠️ "Error Loading Data" message displays  
 ⚠️ "Try Again" button appears  
-⚠️ Network error or connection refused  
+⚠️ Network error or connection refused
 
 **This is expected!** You'll need to either:
+
 - Use mock data (see step 7), or
 - Connect to a real backend (see step 8)
 
@@ -100,7 +106,7 @@ ls src/utils/
 
 # Components
 ls src/components/
-# Expected: DataTable.tsx, UsersTable.tsx, ExercisesTable.tsx, 
+# Expected: DataTable.tsx, UsersTable.tsx, ExercisesTable.tsx,
 #           WorkoutsTable.tsx, DemoUsersTable.tsx
 
 # Pages
@@ -144,6 +150,7 @@ Repeat for `ExercisesTable.tsx` and `WorkoutsTable.tsx`.
 #### 8.1 Ensure Backend is Running
 
 Your backend should implement these endpoints:
+
 - `GET /api/users?page=1&pageSize=10`
 - `GET /api/exercises?page=1&pageSize=10`
 - `GET /api/workouts?page=1&pageSize=10`
@@ -153,6 +160,7 @@ See `API_ENDPOINTS.md` for complete specifications.
 #### 8.2 Update API URL
 
 Edit `.env`:
+
 ```env
 PUBLIC_API_URL=http://localhost:8080/api
 ```
@@ -164,11 +172,14 @@ Replace `8080` with your backend's port.
 Your backend must allow requests from `http://localhost:4321`.
 
 Example for Node.js/Express:
+
 ```javascript
-app.use(cors({
-  origin: 'http://localhost:4321',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: 'http://localhost:4321',
+    credentials: true,
+  })
+);
 ```
 
 #### 8.4 Test Connection
@@ -183,26 +194,31 @@ Should return JSON with paginated data.
 ### 9. Verify Features
 
 #### ✅ Pagination
+
 - [ ] Can change rows per page (5, 10, 25, 50, 100)
 - [ ] Can navigate between pages
 - [ ] Shows correct page numbers
 - [ ] Shows "Showing X-Y of Z results"
 
 #### ✅ Loading State
+
 - [ ] Spinner appears when loading
 - [ ] "Loading data..." message shows
 
 #### ✅ Error Handling
+
 - [ ] Error message displays when API fails
 - [ ] Shows error details
 - [ ] "Try Again" button works
 
 #### ✅ Navigation
+
 - [ ] Header has links to Users, Exercises, Workouts
 - [ ] Links navigate correctly
 - [ ] Active page is accessible
 
 #### ✅ Responsive Design
+
 - [ ] Tables work on desktop
 - [ ] Tables work on mobile
 - [ ] Pagination adapts to screen size
@@ -214,12 +230,14 @@ npm run build
 ```
 
 Expected output:
+
 ```
 ✓ 250 modules transformed.
 ✓ Completed in Xms.
 ```
 
 Preview production build:
+
 ```bash
 npm run preview
 ```
@@ -229,6 +247,7 @@ npm run preview
 ### Issue: "Cannot find module" errors
 
 **Solution:**
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
@@ -237,17 +256,20 @@ npm install
 ### Issue: CORS errors in browser console
 
 **Solution:**
+
 - Add CORS headers to your backend
 - Ensure backend allows `http://localhost:4321`
 
 ### Issue: "Failed to fetch" errors
 
 **Check:**
+
 1. Is backend running?
 2. Is `PUBLIC_API_URL` correct in `.env`?
 3. Are backend endpoints accessible?
 
 **Test:**
+
 ```bash
 curl -i http://localhost:8080/api/users?page=1&pageSize=10
 ```
@@ -255,6 +277,7 @@ curl -i http://localhost:8080/api/users?page=1&pageSize=10
 ### Issue: No data showing
 
 **Check:**
+
 1. Open browser DevTools → Network tab
 2. Look for API requests
 3. Check response status and data
@@ -265,6 +288,7 @@ Use mock data (see step 7)
 ### Issue: TypeScript errors
 
 **Solution:**
+
 ```bash
 npm run astro check
 ```
@@ -273,13 +297,13 @@ If errors persist, check that all files were created correctly.
 
 ## 📚 Documentation
 
-| Document | Purpose |
-|----------|---------|
-| `API_INTEGRATION.md` | Complete integration guide |
-| `API_ENDPOINTS.md` | API specification reference |
-| `IMPLEMENTATION_SUMMARY.md` | Architecture overview |
-| `MOCK_API_GUIDE.md` | Mock vs real API switching |
-| `GETTING_STARTED.md` | This file |
+| Document                    | Purpose                     |
+| --------------------------- | --------------------------- |
+| `API_INTEGRATION.md`        | Complete integration guide  |
+| `API_ENDPOINTS.md`          | API specification reference |
+| `IMPLEMENTATION_SUMMARY.md` | Architecture overview       |
+| `MOCK_API_GUIDE.md`         | Mock vs real API switching  |
+| `GETTING_STARTED.md`        | This file                   |
 
 ## 🎯 Next Steps
 

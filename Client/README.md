@@ -63,6 +63,7 @@ All commands are run from the root of the project, from a terminal:
 ### Modifying the Layout
 
 Edit the layout components in `src/components/`:
+
 - `Header.astro` - Update branding and navigation
 - `Sidebar.astro` - Modify navigation links
 - `Footer.astro` - Customize footer content

@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-12-04
+
+### Added
+
+**Client (Frontend)**
+- Mock API toggle system with environment variable configuration (`PUBLIC_USE_MOCK_API`)
+- API factory pattern for seamless switching between mock and real API endpoints
+- Version information display in footer showing build version, commit hash, and build date
+- Version.json generation via PowerShell script for automated version tracking
+
+**Service (Backend)**
+- CQRS (Command Query Responsibility Segregation) pattern implementation
+- Custom mediator pattern with command and query dispatchers
+- Pipeline behaviors for commands and queries:
+  - Validation behavior
+  - Performance monitoring behavior
+  - Metrics collection behavior
+- User management endpoints with RESTful API design
+- Exercise management endpoints
+- Workout tracking endpoints
+- Entity Framework Core integration with SQLite database
+- Database migrations for User, Exercise, and Workout entities
+- Repository pattern implementation for all entities
+- Base entity class with common properties (Id, CreatedAt, UpdatedAt)
+- DifficultyType enum for exercise difficulty levels
+- Comprehensive repository documentation
+- Version information display in API service static page
+- Production environment configuration
+
+### Changed
+- Refactored Client table components to use unified API factory instead of direct API calls
+- Updated `.env.example` with clearer API URL configuration and mock data usage instructions
+- Enhanced Serilog console output template to use simple text format instead of JSON
+- Improved static HTML page footer with dynamic version loading via JavaScript
+- Updated package versions across Service projects
+
+### Fixed
+- URL parsing issues in Astro VersionInfo component by using file system reads instead of fetch
+- API endpoint routing in Service application
+
 ## [0.1.0] - 2025-12-02
 
 ### Added
@@ -77,6 +117,7 @@ This is the initial commit of the IronAmbit project.
 
 *Generated from git tag v0.0.1 (commit: 73a7f32)*
 
-[Unreleased]: https://github.com/YenkoTools/IronAmbit/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/YenkoTools/IronAmbit/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/YenkoTools/IronAmbit/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/YenkoTools/IronAmbit/compare/v0.0.1...v0.1.0
 [v0.0.1]: https://github.com/YenkoTools/IronAmbit/releases/tag/v0.0.1

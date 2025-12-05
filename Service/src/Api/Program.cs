@@ -1,4 +1,6 @@
 using Api.Extensions;
+using Application.Extensions;
+using Infrastructure.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,12 @@ builder.Configuration
 // Api.Extensions.LoggingExtensions
 builder.ConfigureCustomSerilog();
 
+// Add Infrastructure services (DbContext, Repositories)
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplicationServices();
+
+// Add Database health checks
+builder.Services.AddDatabaseHealthChecks();
 
 var app = builder.Build();
 

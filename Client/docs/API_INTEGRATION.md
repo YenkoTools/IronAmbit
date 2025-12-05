@@ -5,6 +5,7 @@ This guide explains how to use the REST API integration in IronAmbit.
 ## Overview
 
 The application includes three main management pages that interact with a RESTful API:
+
 - **Users** (`/users`) - Manage system users
 - **Exercises** (`/exercises`) - Manage exercises and activities
 - **Workouts** (`/workouts`) - Manage user workouts by day
@@ -56,12 +57,15 @@ PUBLIC_API_URL=http://localhost:8080/api
 Your backend should implement these endpoints:
 
 #### Users
+
 - `GET /api/users?page=1&pageSize=10`
 
 #### Exercises
+
 - `GET /api/exercises?page=1&pageSize=10`
 
 #### Workouts
+
 - `GET /api/workouts?page=1&pageSize=10`
 
 ### 3. Expected Response Format
@@ -145,21 +149,25 @@ Errors are displayed in the UI with a retry button.
 ## Features
 
 ### Pagination
+
 - User can select rows per page: 5, 10, 25, 50, or 100
 - Page navigation with Previous/Next buttons
 - Page numbers with ellipsis for large datasets
 - Shows current range (e.g., "Showing 1-10 of 100 results")
 
 ### Loading States
+
 - Spinner animation while fetching data
 - "Loading data..." message
 
 ### Error Handling
+
 - Error message display with status code
 - "Try Again" button to retry failed requests
 - Network error detection
 
 ### Responsive Design
+
 - Mobile-friendly table layout
 - Responsive pagination controls
 - Tailwind CSS styling
@@ -175,6 +183,7 @@ npm run dev
 ```
 
 Navigate to:
+
 - http://localhost:4321/users
 - http://localhost:4321/exercises
 - http://localhost:4321/workouts

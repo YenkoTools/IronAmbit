@@ -53,7 +53,7 @@ class ApiService {
    */
   async get<T>(endpoint: string, params?: Record<string, string | number>): Promise<T> {
     const url = new URL(`${this.baseUrl}${endpoint}`);
-    
+
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         url.searchParams.append(key, String(value));

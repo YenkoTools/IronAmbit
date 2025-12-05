@@ -7,6 +7,7 @@ This guide shows how to easily switch between mock data (for development/testing
 ### Setup
 
 Add to `.env`:
+
 ```env
 PUBLIC_API_URL=http://localhost:8080/api
 PUBLIC_USE_MOCK_API=false  # Set to 'true' to use mock data
@@ -31,7 +32,10 @@ export const api = {
     return apiService.getPaginated<User>('/users', page, pageSize);
   },
 
-  async getPaginatedExercises(page: number, pageSize: number): Promise<PaginatedResponse<Exercise>> {
+  async getPaginatedExercises(
+    page: number,
+    pageSize: number
+  ): Promise<PaginatedResponse<Exercise>> {
     if (useMockApi) {
       return mockApiService.getPaginatedExercises(page, pageSize);
     }
@@ -85,11 +89,13 @@ Repeat for `ExercisesTable.tsx` and `WorkoutsTable.tsx`.
 ### Usage
 
 **Development with mock data:**
+
 ```env
 PUBLIC_USE_MOCK_API=true
 ```
 
 **Production with real API:**
+
 ```env
 PUBLIC_USE_MOCK_API=false
 PUBLIC_API_URL=https://api.ironambit.com/api
@@ -158,7 +164,7 @@ const fetchUsers = async (page: number, pageSize: number) => {
   const response = features.useMockApi
     ? await mockApiService.getPaginatedUsers(page, pageSize)
     : await apiService.getPaginated<User>('/users', page, pageSize);
-  
+
   return {
     data: response.data,
     total: response.total,
@@ -197,12 +203,12 @@ import { useApi } from '../hooks/useApi';
 
 export default function UsersTable() {
   const { get, isMockMode } = useApi();
-  
+
   const fetchUsers = async (page: number, pageSize: number) => {
     const response = isMockMode
       ? await get.getPaginatedUsers(page, pageSize)
       : await get.getPaginated<User>('/users', page, pageSize);
-    
+
     return {
       data: response.data,
       total: response.total,
@@ -233,6 +239,7 @@ export default function UsersTable() {
 ## Testing Different Scenarios
 
 ### 1. Test with Mock Data
+
 ```bash
 # In .env
 PUBLIC_USE_MOCK_API=true
@@ -241,6 +248,7 @@ npm run dev
 ```
 
 ### 2. Test with Real API (Local)
+
 ```bash
 # In .env
 PUBLIC_USE_MOCK_API=false
@@ -251,6 +259,7 @@ npm run dev
 ```
 
 ### 3. Test with Real API (Remote)
+
 ```bash
 # In .env
 PUBLIC_USE_MOCK_API=false
@@ -267,7 +276,7 @@ Temporarily modify mock API to simulate errors:
 // In mockApi.ts
 async getPaginatedUsers(page: number, pageSize: number) {
   await new Promise((resolve) => setTimeout(resolve, 500));
-  
+
   // Simulate error
   throw {
     message: 'Failed to fetch users',
@@ -288,18 +297,21 @@ async getPaginatedUsers(page: number, pageSize: number) {
 ## Environment File Examples
 
 ### `.env.development`
+
 ```env
 PUBLIC_API_URL=http://localhost:8080/api
 PUBLIC_USE_MOCK_API=true
 ```
 
 ### `.env.production`
+
 ```env
 PUBLIC_API_URL=https://api.ironambit.com/api
 PUBLIC_USE_MOCK_API=false
 ```
 
 ### `.env.staging`
+
 ```env
 PUBLIC_API_URL=https://staging-api.ironambit.com/api
 PUBLIC_USE_MOCK_API=false
@@ -325,7 +337,7 @@ const fetchUsers = async (page: number, pageSize: number) => {
 ```typescript
 export default function UsersTable() {
   const isMockMode = import.meta.env.PUBLIC_USE_MOCK_API === 'true';
-  
+
   return (
     <div>
       {isMockMode && (

@@ -5,15 +5,18 @@ This color palette is extracted from the Iron Ambit logo (`ironambit.svg`) and c
 ## Color Schemes
 
 ### Primary (Deep Navy Blue)
+
 The primary color is the rich navy blue from the logo text and darker elements.
 
 **Usage:**
+
 - Headers and navigation
 - Primary buttons and CTAs
 - Text headings
 - Brand elements
 
 **Examples:**
+
 ```html
 <!-- Backgrounds -->
 <div class="bg-primary-800">Dark navy background</div>
@@ -31,9 +34,11 @@ The primary color is the rich navy blue from the logo text and darker elements.
 ```
 
 ### Secondary (Warm Cream/Beige)
+
 The secondary color is the warm cream/beige from the logo background.
 
 **Usage:**
+
 - Page backgrounds
 - Card backgrounds
 - Section dividers
@@ -41,24 +46,27 @@ The secondary color is the warm cream/beige from the logo background.
 - Alternative backgrounds
 
 **Examples:**
+
 ```html
 <!-- Backgrounds -->
-<body class="bg-secondary-300">Warm cream background</body>
+<body class="bg-secondary-300">
+  Warm cream background
+</body>
 <div class="bg-secondary-200">Light cream section</div>
 
 <!-- Cards -->
-<div class="bg-secondary-100 border border-secondary-400">
-  Card with cream background
-</div>
+<div class="bg-secondary-100 border border-secondary-400">Card with cream background</div>
 
 <!-- Subtle highlights -->
 <div class="hover:bg-secondary-200">Hover effect</div>
 ```
 
 ### Accent (Soft Gold/Amber)
+
 The accent color provides warmth and highlights.
 
 **Usage:**
+
 - Call-to-action elements
 - Highlights and emphasis
 - Success states
@@ -66,6 +74,7 @@ The accent color provides warmth and highlights.
 - Icons and decorative elements
 
 **Examples:**
+
 ```html
 <!-- Highlighted elements -->
 <span class="bg-accent-400 text-accent-900 px-2 py-1 rounded">Badge</span>
@@ -81,9 +90,11 @@ The accent color provides warmth and highlights.
 ```
 
 ### Neutral (Warm Grays)
+
 Neutral colors adjusted to complement the warm palette.
 
 **Usage:**
+
 - Body text
 - Borders
 - Dividers
@@ -91,6 +102,7 @@ Neutral colors adjusted to complement the warm palette.
 - Disabled states
 
 **Examples:**
+
 ```html
 <!-- Text -->
 <p class="text-neutral-700">Body text</p>
@@ -104,14 +116,13 @@ Neutral colors adjusted to complement the warm palette.
 <hr class="border-neutral-200" />
 
 <!-- Disabled states -->
-<button class="bg-neutral-300 text-neutral-500 cursor-not-allowed" disabled>
-  Disabled Button
-</button>
+<button class="bg-neutral-300 text-neutral-500 cursor-not-allowed" disabled>Disabled Button</button>
 ```
 
 ## Color Combinations
 
 ### Header/Navigation
+
 ```html
 <header class="bg-primary-800 text-white">
   <nav class="hover:bg-primary-700 transition-colors">...</nav>
@@ -119,6 +130,7 @@ Neutral colors adjusted to complement the warm palette.
 ```
 
 ### Hero Section
+
 ```html
 <section class="bg-secondary-200">
   <h1 class="text-primary-900">Welcome to Iron Ambit</h1>
@@ -128,6 +140,7 @@ Neutral colors adjusted to complement the warm palette.
 ```
 
 ### Cards
+
 ```html
 <div class="bg-white border border-secondary-400 hover:border-accent-500 transition-colors">
   <h3 class="text-primary-800">Card Title</h3>
@@ -136,6 +149,7 @@ Neutral colors adjusted to complement the warm palette.
 ```
 
 ### Sidebar
+
 ```html
 <aside class="bg-secondary-100 border-r border-secondary-300">
   <a href="#" class="text-primary-700 hover:bg-secondary-200 hover:text-primary-900">
@@ -145,6 +159,7 @@ Neutral colors adjusted to complement the warm palette.
 ```
 
 ### Footer
+
 ```html
 <footer class="bg-primary-900 text-secondary-100">
   <p>&copy; Hallcrest Engineering, 2025</p>
@@ -172,6 +187,7 @@ Neutral colors adjusted to complement the warm palette.
    - Use `text-secondary-100` on dark backgrounds
 
 2. **Interactive Elements**: Provide clear hover and focus states
+
    ```html
    <button class="bg-primary-700 hover:bg-primary-800 focus:ring-2 focus:ring-accent-500">
      Button
@@ -180,30 +196,30 @@ Neutral colors adjusted to complement the warm palette.
 
 3. **Dark Mode**: Consider adding dark mode variants
    ```html
-   <div class="bg-white dark:bg-primary-900 text-primary-900 dark:text-secondary-100">
-     Content
-   </div>
+   <div class="bg-white dark:bg-primary-900 text-primary-900 dark:text-secondary-100">Content</div>
    ```
 
 ## Quick Reference
 
-| Color | Main Usage | Example Classes |
-|-------|-----------|-----------------|
-| Primary | Brand, headers, buttons | `bg-primary-800`, `text-primary-700` |
-| Secondary | Backgrounds, cards | `bg-secondary-200`, `border-secondary-400` |
-| Accent | Highlights, CTAs | `bg-accent-500`, `text-accent-600` |
-| Neutral | Text, borders | `text-neutral-700`, `border-neutral-300` |
+| Color     | Main Usage              | Example Classes                            |
+| --------- | ----------------------- | ------------------------------------------ |
+| Primary   | Brand, headers, buttons | `bg-primary-800`, `text-primary-700`       |
+| Secondary | Backgrounds, cards      | `bg-secondary-200`, `border-secondary-400` |
+| Accent    | Highlights, CTAs        | `bg-accent-500`, `text-accent-600`         |
+| Neutral   | Text, borders           | `text-neutral-700`, `border-neutral-300`   |
 
 ## Updating Components
 
 To use the new palette, simply replace existing Tailwind color classes:
 
 **Before:**
+
 ```html
 <header class="bg-blue-600">...</header>
 ```
 
 **After:**
+
 ```html
 <header class="bg-primary-800">...</header>
 ```
