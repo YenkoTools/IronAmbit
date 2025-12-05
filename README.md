@@ -320,43 +320,78 @@ Output will be in `Service/publish/`
 
 ## 📦 Project Structure
 
-```mermaid
-graph TD
-    subgraph Client["Client - Frontend Application"]
-        C1["src/ - Source code"]
-        C2["components/ - React & Astro components"]
-        C3["pages/ - Routes"]
-        C4["utils/ - API services & helpers"]
-    end
-
-    subgraph Service["Service - Backend API (Clean Architecture)"]
-        A["Api - Entry point & HTTP endpoints"]
-        B["Application - Business logic & CQRS"]
-        D["Domain - Entities & business rules"]
-        I["Infrastructure - Data access & external services"]
-    end
-
-    subgraph Tests["Tests - Unit tests"]
-        TA["Api.Tests"]
-        TB["Application.Tests"]
-        TD["Domain.Tests"]
-        TI["Infrastructure.Tests"]
-    end
-
-    A --> B
-    A --> I
-    B --> D
-    I --> B
-    I --> D
-    Client -.->|HTTP requests| A
-
-    TA -.->|tests| A
-    TB -.->|tests| B
-    TD -.->|tests| D
-    TI -.->|tests| I
+```
+IronAmbit/
+├── Client/                 # Frontend application
+│   ├── src/
+│   │   ├── components/       # React components and Astro components
+│   │   │   ├── DataTable.tsx        # Reusable data table with pagination
+│   │   │   ├── UsersTable.tsx       # Users management table
+│   │   │   ├── ExercisesTable.tsx   # Exercises library table
+│   │   │   └── WorkoutsTable.tsx    # Workouts tracking table
+│   │   ├── pages/           # Astro pages (routes)
+│   │   │   ├── users.astro          # /users page
+│   │   │   ├── exercises.astro      # /exercises page
+│   │   │   └── workouts.astro       # /workouts page
+│   │   ├── layouts/         # Page layouts
+│   │   ├── types/           # TypeScript type definitions
+│   │   ├── utils/           # Utility functions and API services
+│   │   │   ├── api.ts              # API service layer
+│   │   │   ├── apiFactory.ts       # API factory for mock/real API
+│   │   │   └── mockApi.ts          # Mock API for testing
+│   │   └── styles/          # Global styles
+│   ├── public/              # Static assets
+│   └── package.json
+├── Service/                # Backend API (Clean Architecture)
+│   ├── src/
+│   │   ├── Api/                    # Entry point & HTTP layer
+│   │   │   ├── Endpoints/                 # Minimal API endpoints
+│   │   │   │   ├── UserEndpoints.cs
+│   │   │   │   ├── ExerciseEndpoints.cs
+│   │   │   │   └── WorkoutEndpoints.cs
+│   │   │   ├── Extensions/                # Service registration
+│   │   │   ├── Program.cs                 # Application entry point
+│   │   │   └── appsettings.json           # Configuration
+│   │   ├── Application/            # Business logic & CQRS
+│   │   │   ├── Features/                  # Feature-based organization
+│   │   │   │   └── Users/
+│   │   │   │       ├── Commands/          # Write operations
+│   │   │   │       └── Queries/           # Read operations
+│   │   │   ├── Interfaces/                # Abstractions
+│   │   │   ├── Behaviors/                 # Mediator behaviors
+│   │   │   ├── CommandDispatcher.cs       # Command dispatcher
+│   │   │   └── QueryDispatcher.cs         # Query dispatcher
+│   │   ├── Domain/                 # Core domain (no dependencies)
+│   │   │   ├── Entities/                  # Domain entities
+│   │   │   │   ├── User.cs
+│   │   │   │   ├── Exercise.cs
+│   │   │   │   └── Workout.cs
+│   │   │   ├── Enums/                     # Domain enumerations
+│   │   │   ├── Errors/                    # Domain errors
+│   │   │   └── Common/                    # Shared domain types
+│   │   └── Infrastructure/         # Data access & external services
+│   │       ├── Data/                      # Database context
+│   │       │   └── ApplicationDbContext.cs
+│   │       ├── Repositories/              # Data repositories
+│   │       │   ├── UserRepository.cs
+│   │       │   ├── ExerciseRepository.cs
+│   │       │   └── WorkoutRepository.cs
+│   │       ├── Migrations/                # EF Core migrations
+│   │       ├── Configuration/             # Entity configurations
+│   │       └── Extensions/                # Infrastructure registration
+│   ├── tests/
+│   │   ├── Api.Tests/              # API endpoint tests
+│   │   ├── Application.Tests/      # Business logic tests
+│   │   ├── Domain.Tests/           # Domain entity tests
+│   │   └── Infrastructure.Tests/   # Repository & data tests
+│   ├── run.ps1                     # Development helper script
+│   └── Service.slnx                # Solution file
+├── README.md              # This file
+├── LICENSE
+└── CHANGELOG.md
 ```
 
-### Service Architecture
+### Service Architecture (Clean Architecture)
 
 - **Api**: Web API layer with Minimal API endpoints, middleware, and HTTP concerns
 - **Application**: Business logic layer with CQRS pattern (Commands/Queries), mediator, and validation
