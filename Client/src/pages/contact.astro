@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us - IronAmbit">
+	<main class="container mx-auto px-4 py-8 max-w-4xl">
+		<h1 class="text-4xl font-bold mb-8">Contact Us</h1>
+		
+		<div class="prose prose-lg max-w-none">
+			<p class="text-gray-600 mb-8">
+				We'd love to hear from you! Whether you have a question, feedback, or need support, 
+				feel free to reach out using the form below or through our other contact channels.
+			</p>
+
+			<div class="grid md:grid-cols-2 gap-8 mb-12">
+				<div class="bg-gray-50 p-6 rounded-lg">
+					<h2 class="text-xl font-semibold mb-4 flex items-center">
+						<svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+						</svg>
+						Email
+					</h2>
+					<p class="text-gray-700">
+						<a href="mailto:support@ironambit.com" class="text-blue-600 hover:text-blue-800 underline">
+							support@ironambit.com
+						</a>
+					</p>
+					<p class="text-sm text-gray-600 mt-2">
+						We typically respond within 24-48 hours
+					</p>
+				</div>
+
+				<div class="bg-gray-50 p-6 rounded-lg">
+					<h2 class="text-xl font-semibold mb-4 flex items-center">
+						<svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+						</svg>
+						Community
+					</h2>
+					<p class="text-gray-700 mb-2">
+						Join our community forum to connect with other users and get tips
+					</p>
+					<a href="#" class="text-blue-600 hover:text-blue-800 underline">
+						Visit Forum
+					</a>
+				</div>
+			</div>
+
+			<section class="mb-12">
+				<h2 class="text-2xl font-semibold mb-6">Send Us a Message</h2>
+				<form class="space-y-6" id="contactForm">
+					<div>
+						<label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+							Name *
+						</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							required
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+							placeholder="Your name"
+						/>
+					</div>
+
+					<div>
+						<label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+							Email *
+						</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							required
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+							placeholder="your.email@example.com"
+						/>
+					</div>
+
+					<div>
+						<label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+							Subject *
+						</label>
+						<input
+							type="text"
+							id="subject"
+							name="subject"
+							required
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+							placeholder="How can we help?"
+						/>
+					</div>
+
+					<div>
+						<label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+							Category
+						</label>
+						<select
+							id="category"
+							name="category"
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+						>
+							<option value="general">General Inquiry</option>
+							<option value="support">Technical Support</option>
+							<option value="feedback">Feedback</option>
+							<option value="bug">Bug Report</option>
+							<option value="feature">Feature Request</option>
+							<option value="account">Account Issue</option>
+						</select>
+					</div>
+
+					<div>
+						<label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+							Message *
+						</label>
+						<textarea
+							id="message"
+							name="message"
+							rows="6"
+							required
+							class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+							placeholder="Tell us more about your inquiry..."
+						></textarea>
+					</div>
+
+					<div>
+						<button
+							type="submit"
+							class="w-full md:w-auto px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+						>
+							Send Message
+						</button>
+					</div>
+
+					<div id="formMessage" class="hidden p-4 rounded-lg"></div>
+				</form>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
+				<p class="mb-4">
+					Before reaching out, you might find answers to common questions in our 
+					<a href="/docs/getting-started" class="text-blue-600 hover:text-blue-800 underline">documentation</a>.
+				</p>
+			</section>
+
+			<section class="bg-blue-50 p-6 rounded-lg">
+				<h2 class="text-xl font-semibold mb-3">Report a Security Issue</h2>
+				<p class="text-gray-700">
+					If you've discovered a security vulnerability, please email us directly at 
+					<a href="mailto:security@ironambit.com" class="text-blue-600 hover:text-blue-800 underline font-medium">
+						security@ironambit.com
+					</a>. 
+					We take security issues seriously and will respond promptly.
+				</p>
+			</section>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	const form = document.getElementById('contactForm') as HTMLFormElement;
+	const formMessage = document.getElementById('formMessage') as HTMLDivElement;
+
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData);
+
+		// Simulate form submission
+		// In production, this would send to your backend API
+		try {
+			formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+			formMessage.classList.add('bg-blue-100', 'text-blue-700');
+			formMessage.textContent = 'Sending message...';
+
+			// Simulate API call
+			await new Promise(resolve => setTimeout(resolve, 1000));
+
+			formMessage.classList.remove('bg-blue-100', 'text-blue-700');
+			formMessage.classList.add('bg-green-100', 'text-green-700');
+			formMessage.textContent = 'Thank you for your message! We\'ll get back to you soon.';
+			
+			form.reset();
+
+			// Hide success message after 5 seconds
+			setTimeout(() => {
+				formMessage.classList.add('hidden');
+			}, 5000);
+		} catch (error) {
+			formMessage.classList.remove('hidden', 'bg-blue-100', 'text-blue-700');
+			formMessage.classList.add('bg-red-100', 'text-red-700');
+			formMessage.textContent = 'An error occurred. Please try again or email us directly.';
+		}
+	});
+</script>
