@@ -62,10 +62,13 @@ IronAmbit helps users track their fitness journey by managing:
    cp .env.example .env
    ```
 
-4. Edit `.env` and set your API URL:
+4. Edit `.env` and configure your API settings:
    ```env
    PUBLIC_API_URL=http://localhost:8080/api
+   PUBLIC_USE_MOCK_API=true  # Set to 'false' to use real API
    ```
+   - Set `PUBLIC_USE_MOCK_API=true` to use mock data for development without a backend
+   - Set `PUBLIC_USE_MOCK_API=false` to connect to the real backend API
 
 ### Development
 
@@ -82,9 +85,10 @@ The application will be available at: **http://localhost:4321**
 - `npm run dev` - Start development server with hot reload
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build locally
-- `npm run lint` - Lint code with Biome
-- `npm run format` - Format code with Biome
-- `npm run check` - Check and fix code issues
+- `npm run lint` - Lint code with ESLint
+- `npm run lint:fix` - Lint and fix code issues with ESLint
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting with Prettier
 
 ### Project Structure
 
@@ -168,17 +172,33 @@ The client includes a mock API service for development without a backend:
 
 Run the development server:
 
+**Option 1: Using the PowerShell helper script (recommended):**
+
 ```bash
+./run.ps1 -port 7001
+```
+
+The `run.ps1` script:
+- Cleans and restores the solution
+- Starts the API with hot reload (watch mode)
+- Sets the development environment automatically
+- Default port is 7001 if not specified
+
+**Option 2: Using dotnet CLI directly:**
+
+```bash
+cd src/Api
 dotnet run
 ```
 
 Or with hot reload:
 
 ```bash
+cd src/Api
 dotnet watch run
 ```
 
-The API will be available at: **http://localhost:8080** (or the port specified in your launch settings)
+The API will be available at: **https://localhost:7001** (or the port specified)
 
 ### Available Commands
 
@@ -300,23 +320,48 @@ Output will be in `Service/publish/`
 
 ## 📦 Project Structure
 
+```mermaid
+graph TD
+    subgraph Client["Client - Frontend Application"]
+        C1["src/ - Source code"]
+        C2["components/ - React & Astro components"]
+        C3["pages/ - Routes"]
+        C4["utils/ - API services & helpers"]
+    end
+
+    subgraph Service["Service - Backend API (Clean Architecture)"]
+        A["Api - Entry point & HTTP endpoints"]
+        B["Application - Business logic & CQRS"]
+        D["Domain - Entities & business rules"]
+        I["Infrastructure - Data access & external services"]
+    end
+
+    subgraph Tests["Tests - Unit tests"]
+        TA["Api.Tests"]
+        TB["Application.Tests"]
+        TD["Domain.Tests"]
+        TI["Infrastructure.Tests"]
+    end
+
+    A --> B
+    A --> I
+    B --> D
+    I --> B
+    I --> D
+    Client -.->|HTTP requests| A
+
+    TA -.->|tests| A
+    TB -.->|tests| B
+    TD -.->|tests| D
+    TI -.->|tests| I
 ```
-IronAmbit/
-├── Client/                 # Frontend application
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── README.md
-├── Service/                # Backend API
-│   ├── Controllers/
-│   ├── Models/
-│   ├── Services/
-│   ├── appsettings.json
-│   └── Program.cs
-├── README.md              # This file
-├── LICENSE
-└── CHANGELOG.md
-```
+
+### Service Architecture
+
+- **Api**: Web API layer with Minimal API endpoints, middleware, and HTTP concerns
+- **Application**: Business logic layer with CQRS pattern (Commands/Queries), mediator, and validation
+- **Domain**: Core domain entities, enums, errors, and business rules (no dependencies)
+- **Infrastructure**: Data persistence (EF Core), repositories, and external service integrations
 
 ---
 
@@ -325,14 +370,26 @@ IronAmbit/
 ### Client Testing
 ```bash
 cd Client
-npm run check        # Type checking
-npm run lint         # Linting
+npm run lint         # Lint with ESLint
+npm run format:check # Check code formatting with Prettier
 ```
 
 ### Service Testing
 ```bash
 cd Service
-dotnet test          # Run unit tests
+dotnet test          # Run all unit tests
+```
+
+The Service includes a comprehensive test project for each assembly:
+
+- **Api.Tests** - Tests for API endpoints, middleware, and HTTP concerns
+- **Application.Tests** - Tests for CQRS handlers, validators, and business logic
+- **Domain.Tests** - Tests for domain entities, value objects, and business rules
+- **Infrastructure.Tests** - Tests for repositories, data access, and external integrations
+
+Run tests for a specific project:
+```bash
+dotnet test tests/Application.Tests/Application.Tests.csproj
 ```
 
 ---
