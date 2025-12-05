@@ -7,20 +7,23 @@ Biome v2.3.8 has been successfully installed and configured for the IronAmbit Cl
 ## What Was Done
 
 ### 1. Package Installation
+
 - Installed `@biomejs/biome@2.3.8` as a dev dependency
 - **No ESLint to uninstall** - The project didn't have ESLint configured
 
 ### 2. Configuration Files Created
 
 #### `biome.json`
+
 Complete Biome configuration with:
+
 - **VCS Integration**: Git support enabled with main branch tracking
-- **Formatter**: 
+- **Formatter**:
   - 2-space indentation
   - 100 character line width
   - Single quotes for JS, double quotes for JSX
   - Trailing commas (ES5 style)
-- **Linter**: 
+- **Linter**:
   - All recommended rules enabled
   - Accessibility (a11y) checks
   - React-specific rules
@@ -41,57 +44,72 @@ Complete Biome configuration with:
 ```
 
 ### 4. Files Updated
+
 - `.gitignore` - Added `.biome-cache/` to ignored files
 
 ## Usage
 
 ### Lint Your Code
+
 ```bash
 npm run lint
 ```
+
 Checks for code quality issues without modifying files.
 
 ### Format Your Code
+
 ```bash
 npm run format
 ```
+
 Formats all files according to the configured style.
 
 ### Check and Fix Everything
+
 ```bash
 npm run check
 ```
+
 Runs both linting and formatting, automatically fixing what it can.
 
 ### CI/CD Integration
+
 ```bash
 npm run ci
 ```
+
 Runs checks suitable for continuous integration (fails on issues, doesn't fix).
 
 ## Current Status
 
 ✅ **All Critical Issues Fixed**
+
 - Unused imports removed
 - Button accessibility issues resolved (added `type="button"`)
 - CSS formatting configured for Tailwind
 
 ⚠️ **Expected Warnings** (Safe to ignore)
 The following warnings are expected in Astro files and are not actual issues:
+
 - Unused `Props` interfaces in `.astro` files (used by Astro's type system)
 - Unused prop destructuring in `.astro` files (used in component templates)
 
 ## IDE Integration
 
 ### VS Code
+
 Install the official Biome extension:
+
 1. Open VS Code
 2. Go to Extensions (Ctrl+Shift+X)
 3. Search for "Biome"
 4. Install the official extension by Biomejs
 
 ### Configuration
+
 The `.vscode/settings.json` can include:
+
 ```json
 {
   "editor.defaultFormatter": "biomejs.biome",
@@ -111,11 +129,13 @@ The `.vscode/settings.json` can include:
 ## Features Configured
 
 ### Code Formatting
+
 - Consistent code style across the project
 - Automatic import organization
 - Configurable preferences (quotes, semicolons, etc.)
 
 ### Linting Rules
+
 - **Accessibility**: Ensures proper ARIA attributes and semantic HTML
 - **Complexity**: Prevents overly complex code
 - **Correctness**: Catches common programming errors
@@ -125,6 +145,7 @@ The `.vscode/settings.json` can include:
 - **Suspicious**: Catches suspicious code patterns
 
 ### Special Handling
+
 - **Astro files**: Relaxed import type rules
 - **React/JSX files**: Double quotes for JSX attributes
 - **CSS files**: Tailwind directives fully supported
@@ -133,6 +154,7 @@ The `.vscode/settings.json` can include:
 ## Comparison with ESLint + Prettier
 
 **Advantages of Biome:**
+
 - ✅ Single tool (replaces both ESLint and Prettier)
 - ✅ ~20x faster than ESLint + Prettier
 - ✅ Zero configuration needed (sensible defaults)

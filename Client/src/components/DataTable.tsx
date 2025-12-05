@@ -93,7 +93,7 @@ export default function DataTable<T extends Record<string, unknown>>({
   const getValue = (item: T, key: string): unknown => {
     const keys = key.split('.');
     let value: unknown = item;
-    
+
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {
         value = (value as Record<string, unknown>)[k];
@@ -101,7 +101,7 @@ export default function DataTable<T extends Record<string, unknown>>({
         return undefined;
       }
     }
-    
+
     return value;
   };
 
@@ -160,13 +160,8 @@ export default function DataTable<T extends Record<string, unknown>>({
         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
           <div>
             <p className="text-sm text-gray-700">
-              Showing{' '}
-              <span className="font-medium">{(currentPage - 1) * pageSize + 1}</span>
-              {' '}-{' '}
-              <span className="font-medium">
-                {Math.min(currentPage * pageSize, totalItems)}
-              </span>
-              {' '}of{' '}
+              Showing <span className="font-medium">{(currentPage - 1) * pageSize + 1}</span> -{' '}
+              <span className="font-medium">{Math.min(currentPage * pageSize, totalItems)}</span> of{' '}
               <span className="font-medium">{totalItems}</span> results
             </p>
           </div>
@@ -334,10 +329,7 @@ export default function DataTable<T extends Record<string, unknown>>({
               </tr>
             ) : (
               data.map((item, index) => (
-                <tr
-                  key={`row-${index}`}
-                  className="hover:bg-gray-50 transition-colors"
-                >
+                <tr key={`row-${index}`} className="hover:bg-gray-50 transition-colors">
                   {columns.map((column) => {
                     const value = getValue(item, String(column.key));
                     return (
@@ -345,9 +337,7 @@ export default function DataTable<T extends Record<string, unknown>>({
                         key={`${index}-${String(column.key)}`}
                         className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
                       >
-                        {column.render
-                          ? column.render(value, item)
-                          : String(value ?? '')}
+                        {column.render ? column.render(value, item) : String(value ?? '')}
                       </td>
                     );
                   })}

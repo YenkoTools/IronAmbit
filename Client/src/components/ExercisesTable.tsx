@@ -58,7 +58,7 @@ export default function ExercisesTable() {
     {
       key: 'equipment',
       header: 'Equipment',
-      render: (value) => value ? String(value) : 'Bodyweight',
+      render: (value) => (value ? String(value) : 'Bodyweight'),
     },
     {
       key: 'description',

@@ -1,3 +1,4 @@
+#!/usr/bin/env pwsh
 # Requires PowerShell 7+
 
 # Exit on error
@@ -28,10 +29,6 @@ if (-not $GIT_TAG) {
 # Get short commit hash
 $COMMIT_HASH = git rev-parse --short HEAD
 
-# Get hostname and current user
-$COMPUTER_NAME = $env:COMPUTERNAME
-$CURRENT_USER = $env:USERNAME
-
 # Build date info
 $NOW = Get-Date -UFormat %s
 $MIDNIGHT = (Get-Date -Date (Get-Date).Date -UFormat %s)
@@ -56,16 +53,14 @@ Write-Host "Build Number: $BUILD_NUMBER"
 $JSON = @{
     BuildNumber = $BUILD_NUMBER
     BuildDate   = $BUILD_DATE
-    BuildHost   = $COMPUTER_NAME
     CommitHash  = $COMMIT_HASH
-    CurrentUser = $CURRENT_USER
     GitBranch   = $GIT_BRANCH
     GitHead     = $GIT_HEAD
     GitTag      = $GIT_TAG
 } | ConvertTo-Json -Depth 10 -Compress
 
 # Write to version.json
-$OUTPUT_PATH = Join-Path -Path $SCRIPT_DIR -ChildPath "Client/src/Client/wwwroot\version.json"
+$OUTPUT_PATH = Join-Path -Path $SCRIPT_DIR -ChildPath "Client/public/version.json"
 New-Item -ItemType Directory -Path (Split-Path -Parent $OUTPUT_PATH) -Force | Out-Null
 $JSON | Set-Content -Path $OUTPUT_PATH -Encoding UTF8
 Write-Host "✅ version.json written to $OUTPUT_PATH"

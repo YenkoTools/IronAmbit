@@ -80,18 +80,21 @@ Client/
 ## Key Features
 
 ### 🎯 Error Handling
+
 - Network errors are caught and displayed with user-friendly messages
 - HTTP status codes are shown
 - "Try Again" button to retry failed requests
 - No crashes on API failures
 
 ### 📊 Pagination
+
 - Server-side pagination reduces data transfer
 - User controls rows per page
 - Elegant page navigation with ellipsis for large datasets
 - Shows current range and total count
 
 ### 🎨 UI/UX
+
 - Loading spinners during data fetches
 - Responsive tables for mobile and desktop
 - Color-coded badges for categories and status
@@ -99,6 +102,7 @@ Client/
 - Clean, modern Tailwind CSS styling
 
 ### 🔧 Developer Experience
+
 - Full TypeScript type safety
 - Reusable components reduce code duplication
 - Easy to customize column definitions
@@ -110,12 +114,14 @@ Client/
 ### 1. Configure API URL
 
 Create `.env` file:
+
 ```bash
 cd Client
 cp .env.example .env
 ```
 
 Edit `.env`:
+
 ```env
 PUBLIC_API_URL=http://localhost:8080/api
 ```
@@ -146,6 +152,7 @@ Your REST API should implement these endpoints:
 - `GET /api/workouts?page=1&pageSize=10`
 
 Response format:
+
 ```json
 {
   "data": [...],
@@ -167,6 +174,7 @@ npm run dev
 ```
 
 Visit:
+
 - http://localhost:4321/users
 - http://localhost:4321/exercises
 - http://localhost:4321/workouts
@@ -223,6 +231,7 @@ Visit:
 ## Testing Ready
 
 The mock API service allows for:
+
 - Unit testing components in isolation
 - Integration testing without backend
 - Demo/presentation mode

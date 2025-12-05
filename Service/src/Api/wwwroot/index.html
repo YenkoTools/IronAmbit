@@ -121,6 +121,21 @@
             margin-top: auto;
         }
 
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .version-info {
+            font-size: 0.75rem;
+            color: rgba(249, 236, 216, 0.7);
+        }
+
+        .version-info span {
+            margin: 0 0.5rem;
+        }
+
         .api-info {
             background: white;
             border-left: 4px solid #1C303F;
@@ -200,8 +215,66 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 IronAmbit. Hallcrest Engineering</p>
+            <div class="footer-content">
+                <p>&copy; 2025 - IronAmbit, Hallcrest Engineering</p>
+                <div id="version-info" class="version-info">
+                    <span id="version-loading">Loading version info...</span>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Fetch and display version information
+        (async function loadVersion() {
+            try {
+                const response = await fetch('/version.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch version.json');
+                }
+                
+                const version = await response.json();
+                const versionElement = document.getElementById('version-info');
+                
+                // Format the build date
+                let formattedDate = '';
+                if (version.BuildDate) {
+                    try {
+                        const date = new Date(version.BuildDate);
+                        formattedDate = date.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                    } catch {
+                        formattedDate = version.BuildDate;
+                    }
+                }
+                
+                // Build version display
+                let versionHtml = '';
+                if (version.GitTag) {
+                    versionHtml += `<span><strong>Version:</strong> ${version.GitTag}`;
+                    if (version.CommitHash) {
+                        versionHtml += ` (${version.CommitHash})`;
+                    }
+                    versionHtml += '</span>';
+                }
+
+                if (version.BuildNumber) {
+                    versionHtml += `<span><strong>Build Number:</strong> ${version.BuildNumber}</span>`;
+                }
+
+                if (formattedDate) {
+                    versionHtml += `<span><strong>Build:</strong> ${formattedDate}</span>`;
+                }
+                
+                versionElement.innerHTML = versionHtml || 'Version info unavailable';
+            } catch (error) {
+                console.warn('Failed to load version info:', error);
+                document.getElementById('version-info').innerHTML = 'Version info unavailable';
+            }
+        })();
+    </script>
 </body>
 </html>

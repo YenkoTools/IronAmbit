@@ -1,9 +1,9 @@
 /**
  * Mock API Service for Development and Testing
- * 
+ *
  * This file provides mock data responses that match the expected API format.
  * Useful for development when the backend API is not yet available.
- * 
+ *
  * To use: Import and replace the real apiService in your table components temporarily.
  */
 
@@ -213,7 +213,10 @@ export const mockApiService = {
   /**
    * Get paginated exercises
    */
-  async getPaginatedExercises(page: number, pageSize: number): Promise<PaginatedResponse<Exercise>> {
+  async getPaginatedExercises(
+    page: number,
+    pageSize: number
+  ): Promise<PaginatedResponse<Exercise>> {
     // Simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -253,9 +256,9 @@ export const mockApiService = {
 
 /**
  * Example usage in a table component:
- * 
+ *
  * import { mockApiService } from '../utils/mockApi';
- * 
+ *
  * const fetchUsers = async (page: number, pageSize: number) => {
  *   const response = await mockApiService.getPaginatedUsers(page, pageSize);
  *   return {

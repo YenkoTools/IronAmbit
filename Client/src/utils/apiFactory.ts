@@ -1,6 +1,6 @@
 /**
  * API Factory - Switches between mock and real API based on environment configuration
- * 
+ *
  * Set PUBLIC_USE_MOCK_API=true in .env to use mock data
  * Set PUBLIC_USE_MOCK_API=false in .env to use real API
  */
@@ -30,7 +30,10 @@ export const api = {
   /**
    * Get paginated exercises
    */
-  async getPaginatedExercises(page: number, pageSize: number): Promise<PaginatedResponse<Exercise>> {
+  async getPaginatedExercises(
+    page: number,
+    pageSize: number
+  ): Promise<PaginatedResponse<Exercise>> {
     if (useMockApi) {
       return mockApiService.getPaginatedExercises(page, pageSize);
     }
