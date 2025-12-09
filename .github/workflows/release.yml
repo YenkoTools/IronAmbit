@@ -13,8 +13,8 @@ jobs:
   prepare-client-release:
     runs-on: ubuntu-latest
     outputs:
-      client--tag_name: ${{ steps.release.outputs.client--tag_name}}
-      client--release_created: ${{ steps.release.outputs.client--release_created}}
+      Client--tag_name: ${{ steps.release.outputs.Client--tag_name}}
+      Client--release_created: ${{ steps.release.outputs.Client--release_created}}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -30,7 +30,7 @@ jobs:
 
 
   release-client:
-    if: ${{needs.prepare-client-release.outputs.client--release_created}}
+    if: ${{needs.prepare-client-release.outputs.Client--release_created}}
     runs-on: ubuntu-latest
     needs: prepare-client-release
     steps:
@@ -40,11 +40,11 @@ jobs:
           node-version: 24
           cache-path: Client/node_modules
           cache-key: "${{hashFiles('Client/package-lock.json')}}"
-          project: client
+          project: Client
       - run: npm test --prefix Client -- a --watchAll=false
       - run: npm run build --prefix Client
       - run: zip -r client-build.zip Client/build
       - name: Upload Release Artifact
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ needs.prepare-client-release.outputs.client--tag_name }} client-build.zip
+        run: gh release upload ${{ needs.prepare-client-release.outputs.Client--tag_name }} client-build.zip
