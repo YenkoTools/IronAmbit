@@ -7,6 +7,13 @@
 
 * Rename release job and update dependencies for improved workflow ([514ffd2](https://github.com/YenkoTools/IronAmbit/commit/514ffd226228d23137c4ddfc16c4b422b6356ce0))
 
+## [0.2.1](https://github.com/YenkoTools/IronAmbit/compare/service-v0.2.0...service-v0.2.1) (2025-12-09)
+
+
+### Code Refactoring
+
+* Rename release job and update dependencies for improved workflow ([514ffd2](https://github.com/YenkoTools/IronAmbit/commit/514ffd226228d23137c4ddfc16c4b422b6356ce0))
+
 ## [0.2.0](https://github.com/YenkoTools/IronAmbit/compare/service-v0.1.0...service-v0.2.0) (2025-12-09)
 
 
