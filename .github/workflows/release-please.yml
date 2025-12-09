@@ -11,10 +11,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  release-please:
+  create-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Run Release Please
+      - name: Run Release
         uses: googleapis/release-please-action@v4
         id: release
         with:
