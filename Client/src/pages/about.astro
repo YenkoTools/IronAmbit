@@ -51,5 +51,21 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
     </div>
+
+    <div class="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+      <h3 class="text-xl font-semibold text-gray-800 mb-3">🚀 Automated Releases</h3>
+      <p class="text-gray-700 mb-3">
+        This project uses <a href="https://github.com/googleapis/release-please" class="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">release-please</a> to automate versioning and CHANGELOG generation.
+      </p>
+      <div class="text-sm text-gray-600 space-y-2">
+        <p><strong>How it works:</strong></p>
+        <ul class="list-disc list-inside ml-2 space-y-1">
+          <li>Parses commit messages following <a href="https://www.conventionalcommits.org/" class="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Conventional Commits</a></li>
+          <li>Automatically determines version bumps (major, minor, patch)</li>
+          <li>Creates release PRs with updated CHANGELOG and version files</li>
+          <li>Generates GitHub releases when release PRs are merged</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </Layout>

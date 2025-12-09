@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - 'release/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare-client-release:
+    runs-on: ubuntu-latest
+    outputs:
+      Client--tag_name: ${{ steps.release.outputs.Client--tag_name}}
+      Client--release_created: ${{ steps.release.outputs.Client--release_created}}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+      - name: Print release outputs for debugging
+        continue-on-error: true
+        run: |
+          echo "Release outputs:"
+          echo "${{ toJson(steps.release.outputs) }}"
+
+
+  release-client:
+    if: ${{needs.prepare-client-release.outputs.Client--release_created}}
+    runs-on: ubuntu-latest
+    needs: prepare-client-release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node-env/action.yml
+        with:
+          node-version: 24
+          cache-path: Client/node_modules
+          cache-key: "${{hashFiles('Client/package-lock.json')}}"
+          project: Client
+      - run: npm test --prefix Client -- a --watchAll=false
+      - run: npm run build --prefix Client
+      - run: zip -r client-build.zip Client/build
+      - name: Upload Release Artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ needs.prepare-client-release.outputs.Client--tag_name }} client-build.zip
