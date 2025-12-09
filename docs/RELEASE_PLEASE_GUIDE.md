@@ -286,6 +286,29 @@ Result: Release PR created based on `release/v2.0` branch
 
 ## Troubleshooting
 
+### Commit Parse Warnings
+
+You may see warnings like:
+```
+❯ commit could not be parsed: 7e466ea Merge branch 'develop'
+❯ error message: Error: unexpected token ' ' at 1:6
+```
+
+**These are warnings, not errors.** Release Please will:
+- Skip commits it can't parse
+- Continue processing valid conventional commits
+- Still generate releases based on parseable commits
+
+**Common unparseable commits:**
+- Merge commits: `Merge pull request #12`
+- Legacy commits: `Refactor code structure...`
+- Non-conventional commits: `sanity`, `Update README`
+
+**Solution:** These warnings are normal for repositories with legacy commits. Going forward:
+1. Use conventional commit format for all new commits
+2. Configure merge commit messages to use conventional format
+3. The warnings won't prevent releases from being created
+
 ### No Release PR Created
 
 1. **Check commits** - Ensure you're using conventional commit format
