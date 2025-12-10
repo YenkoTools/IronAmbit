@@ -50,10 +50,13 @@ export default function UsersTable() {
   ];
 
   const fetchUsers = async (page: number, pageSize: number) => {
+    console.log(`[UsersTable] Fetching users - Page: ${page}, PageSize: ${pageSize}`);
     const response = await api.getPaginatedUsers(page, pageSize);
+    console.log(`[UsersTable] API Response (transformed):`, response);
+
     return {
-      data: response.data,
-      total: response.total,
+      data: response.data || [],
+      total: response.total || 0,
     };
   };
 

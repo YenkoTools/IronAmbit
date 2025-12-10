@@ -45,14 +45,26 @@ export default function DataTable<T extends Record<string, unknown>>({
    * Load data from API
    */
   const loadData = async () => {
+    console.log(`[DataTable] Loading data - Page: ${currentPage}, PageSize: ${pageSize}`);
     setLoading(true);
     setError(null);
 
     try {
       const result = await fetchData(currentPage, pageSize);
-      setData(result.data);
-      setTotalItems(result.total);
+      console.log(`[DataTable] Received data:`, result);
+      console.log(`[DataTable] Data items:`, result?.data?.length ?? 0);
+      console.log(`[DataTable] Total items:`, result?.total ?? 0);
+
+      if (!result || !result.data) {
+        console.warn(`[DataTable] Result or result.data is undefined, using empty array`);
+        setData([]);
+        setTotalItems(0);
+      } else {
+        setData(result.data);
+        setTotalItems(result.total || 0);
+      }
     } catch (err) {
+      console.error(`[DataTable] Error loading data:`, err);
       const apiError = err as ApiError;
       setError({
         message: apiError.message || 'Failed to load data',
@@ -62,6 +74,7 @@ export default function DataTable<T extends Record<string, unknown>>({
       setData([]);
     } finally {
       setLoading(false);
+      console.log(`[DataTable] Loading complete`);
     }
   };
 

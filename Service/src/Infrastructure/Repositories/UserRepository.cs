@@ -1,4 +1,5 @@
 using Application.Interfaces;
+using Domain.Common;
 using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -30,5 +31,19 @@ public class UserRepository : Repository<User>, IUserRepository
     {
         return await _dbSet
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public new async Task<PagedResult<User>> GetPagedAsync(int pageNumber, int pageSize, CancellationToken cancellationToken = default)
+    {
+        var totalCount = await _dbSet.CountAsync(cancellationToken);
+        
+        var items = await _dbSet
+            .OrderBy(u => u.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken);
+
+        return PagedResult<User>.Create(items, totalCount, pageSize, pageNumber);
     }
 }

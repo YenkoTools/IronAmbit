@@ -1,3 +1,4 @@
+using Domain.Common;
 using Domain.Entities;
 
 namespace Application.Interfaces;
@@ -22,4 +23,13 @@ public interface IUserRepository : IRepository<User>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The user if found; otherwise, null.</returns>
     Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Retrieves a paginated list of users.
+    /// </summary>
+    /// <param name="pageNumber">The page number (1-based).</param>
+    /// <param name="pageSize">The number of items per page.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>A paginated result containing users.</returns>
+    new Task<PagedResult<User>> GetPagedAsync(int pageNumber, int pageSize, CancellationToken cancellationToken = default);
 }

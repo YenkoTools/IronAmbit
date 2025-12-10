@@ -14,6 +14,9 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ICommandDispatcher, CommandDispatcher>();
         services.AddTransient<IQueryDispatcher, QueryDispatcher>();
 
+        // Register services
+        services.AddSingleton<IMetricsService, MetricsService>();
+
         // Register pipeline behaviors (order matters - validation first, then performance, then metrics)
         services.AddScoped(typeof(IQueryPipelineBehavior<,>), typeof(QueryValidationBehavior<,>));
         services.AddScoped(typeof(ICommandPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));

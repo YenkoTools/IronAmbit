@@ -38,14 +38,33 @@ class ApiService {
         const errorData = await response.json();
         error.message = errorData.message || error.message;
         error.details = errorData;
+        console.error(`[API] Error Response:`, errorData);
       } catch {
         // If response is not JSON, keep the default error message
+        console.error(`[API] Non-JSON Error Response`);
       }
 
+      console.error(`[API] Throwing error:`, error);
       throw error;
     }
 
-    return response.json();
+    try {
+      const data = await response.json();
+      console.log(`[API] Success Response Data:`, data);
+      console.log(`[API] Response Data Type:`, typeof data);
+      console.log(
+        `[API] Response Data Keys:`,
+        data && typeof data === 'object' ? Object.keys(data) : 'N/A'
+      );
+      return data;
+    } catch (e) {
+      console.error(`[API] Failed to parse JSON response:`, e);
+      throw {
+        message: 'Failed to parse API response',
+        status: response.status,
+        details: e,
+      } as ApiError;
+    }
   }
 
   /**
@@ -60,11 +79,17 @@ class ApiService {
       });
     }
 
+    console.log(`[API] GET Request: ${url.toString()}`);
+    console.log(`[API] Headers:`, this.defaultHeaders);
+
     try {
       const response = await fetch(url.toString(), {
         method: 'GET',
         headers: this.defaultHeaders,
       });
+
+      console.log(`[API] Response Status: ${response.status} ${response.statusText}`);
+      console.log(`[API] Response Headers:`, Object.fromEntries(response.headers.entries()));
 
       return this.handleResponse<T>(response);
     } catch (error) {
@@ -161,7 +186,24 @@ class ApiService {
       ...additionalParams,
     };
 
-    return this.get<PaginatedResponse<T>>(endpoint, params);
+    const response = await this.get<any>(endpoint, params);
+
+    // Transform server response format to client format
+    // Server returns: { items, totalCount, pageNumber, pageSize, totalPages }
+    // Client expects: { data, total, page, pageSize, totalPages }
+    if (response.items && response.totalCount !== undefined) {
+      console.log(`[API] Transforming server response format`);
+      return {
+        data: response.items,
+        total: response.totalCount,
+        page: response.pageNumber || page,
+        pageSize: response.pageSize || pageSize,
+        totalPages: response.totalPages || Math.ceil(response.totalCount / pageSize),
+      };
+    }
+
+    // If already in correct format, return as-is
+    return response as PaginatedResponse<T>;
   }
 }
 
