@@ -2,6 +2,10 @@ using Api.Endpoints;
 using Api.Extensions;
 using Application.Extensions;
 using Infrastructure.Extensions;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +33,66 @@ builder.Services.AddApplicationServices();
 // Add Database health checks
 builder.Services.AddDatabaseHealthChecks();
 
+// Configure OpenTelemetry
+var serviceName = builder.Configuration["OpenTelemetry:ServiceName"] ?? "IronAmbit.Service";
+var serviceVersion = builder.Configuration["OpenTelemetry:ServiceVersion"] ?? "1.0.0";
+var otlpEndpoint = builder.Configuration["OpenTelemetry:Otlp:Endpoint"] ?? "http://localhost:18889";
+
+Log.Information("OpenTelemetry configured with endpoint: {Endpoint}", otlpEndpoint);
+
+// Enable detailed OTLP exporter logging
+builder.Logging.SetMinimumLevel(LogLevel.Trace);
+builder.Logging.AddFilter("OpenTelemetry", LogLevel.Trace);
+builder.Logging.AddFilter("OpenTelemetry.Exporter", LogLevel.Trace);
+builder.Logging.AddFilter("OpenTelemetry.Exporter.OpenTelemetryProtocol", LogLevel.Trace);
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource
+        .AddService(serviceName: serviceName, serviceVersion: serviceVersion)
+        .AddAttributes(new Dictionary<string, object>
+        {
+            ["deployment.environment"] = builder.Environment.EnvironmentName,
+            ["host.name"] = Environment.MachineName
+        }))
+    .WithTracing(tracing => tracing
+        .AddAspNetCoreInstrumentation(options =>
+        {
+            options.RecordException = true;
+            options.EnrichWithHttpRequest = (activity, httpRequest) =>
+            {
+                activity.SetTag("http.client_ip", httpRequest.HttpContext.Connection.RemoteIpAddress?.ToString());
+            };
+        })
+        .AddHttpClientInstrumentation(options =>
+        {
+            options.RecordException = true;
+        })
+        .AddEntityFrameworkCoreInstrumentation(options =>
+        {
+            options.EnrichWithIDbCommand = (activity, command) =>
+            {
+                activity.SetTag("db.command_timeout", command.CommandTimeout);
+            };
+        })
+        .AddSource("IronAmbit.Application.Commands")
+        .AddSource("IronAmbit.Application.Queries")
+        .AddOtlpExporter(options =>
+        {
+            options.Endpoint = new Uri(otlpEndpoint);
+            options.Protocol = OtlpExportProtocol.HttpProtobuf;
+        }))
+    .WithMetrics(metrics => metrics
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddRuntimeInstrumentation()
+        .AddMeter("IronAmbit.Application.Commands")
+        .AddMeter("IronAmbit.Application.Queries")
+        .AddOtlpExporter(options =>
+        {
+            options.Endpoint = new Uri(otlpEndpoint);
+            options.Protocol = OtlpExportProtocol.HttpProtobuf;
+        }));
+
 // Configure CORS
 builder.Services.AddCors(options =>
 {
@@ -54,6 +118,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+// Add Serilog request logging
+app.UseSerilogRequestLogging();
 
 // Configure Swagger/OpenAPI in development
 if (app.Environment.IsDevelopment())
