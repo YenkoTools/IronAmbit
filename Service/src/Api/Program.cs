@@ -78,8 +78,16 @@ builder.Services.AddOpenTelemetry()
         .AddSource("IronAmbit.Application.Queries")
         .AddOtlpExporter(options =>
         {
-            options.Endpoint = new Uri(otlpEndpoint);
+            options.Endpoint = new Uri($"{otlpEndpoint}/v1/traces");
             options.Protocol = OtlpExportProtocol.HttpProtobuf;
+            options.ExportProcessorType = OpenTelemetry.ExportProcessorType.Batch;
+            options.BatchExportProcessorOptions = new OpenTelemetry.BatchExportProcessorOptions<System.Diagnostics.Activity>
+            {
+                MaxQueueSize = 2048,
+                ScheduledDelayMilliseconds = 1000,
+                ExporterTimeoutMilliseconds = 30000,
+                MaxExportBatchSize = 512
+            };
         }))
     .WithMetrics(metrics => metrics
         .AddAspNetCoreInstrumentation()
@@ -87,10 +95,12 @@ builder.Services.AddOpenTelemetry()
         .AddRuntimeInstrumentation()
         .AddMeter("IronAmbit.Application.Commands")
         .AddMeter("IronAmbit.Application.Queries")
-        .AddOtlpExporter(options =>
+        .AddOtlpExporter((exporterOptions, metricReaderOptions) =>
         {
-            options.Endpoint = new Uri(otlpEndpoint);
-            options.Protocol = OtlpExportProtocol.HttpProtobuf;
+            exporterOptions.Endpoint = new Uri($"{otlpEndpoint}/v1/metrics");
+            exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
+            metricReaderOptions.PeriodicExportingMetricReaderOptions.ExportIntervalMilliseconds = 1000;
+            metricReaderOptions.PeriodicExportingMetricReaderOptions.ExportTimeoutMilliseconds = 30000;
         }));
 
 // Configure CORS
