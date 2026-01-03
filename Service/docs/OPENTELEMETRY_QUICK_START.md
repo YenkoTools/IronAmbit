@@ -39,6 +39,7 @@ If it's not running, start it with:
 docker run -d --name aspire-dashboard \
   -p 18888:18888 \
   -p 18889:18889 \
+  -p 18890:18890 \
   -e DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true \
   mcr.microsoft.com/dotnet/aspire-dashboard:latest
 ```
