@@ -13,7 +13,8 @@ if (-not $port) {
 }
 
 # Set the ASP.NET Core environment
-$env:ASPNETCORE_ENVIRONMENT = "Development"
+# $env:ASPNETCORE_ENVIRONMENT = "Development"
+$env:ASPNETCORE_ENVIRONMENT = "Production"
 $env:ASPNETCORE_URLS = "https://localhost:$port"
 
 Write-Host "Starting development server on port $port in $env:ASPNETCORE_ENVIRONMENT mode"
@@ -24,4 +25,4 @@ dotnet restore ./Service.slnx
 
 # Start the development server in a new process
 # Start-Process "dotnet" "run --project ./src/Api/ --urls https://localhost:$port"
-Start-Process -FilePath "dotnet" -ArgumentList "watch --project ./src/Api/ --urls https://localhost:$port --environment Development" -NoNewWindow -Wait
+Start-Process -FilePath "dotnet" -ArgumentList "watch --project ./src/Api/ --no-launch-profile --urls https://localhost:$port --environment Production" -NoNewWindow -Wait
