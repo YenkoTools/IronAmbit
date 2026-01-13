@@ -3,6 +3,7 @@ using Application.Common;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using FluentValidation;
+using Application.Interfaces;
 
 namespace Application.Extensions;
 

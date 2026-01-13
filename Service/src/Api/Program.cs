@@ -108,7 +108,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowClient", policy =>
     {
-        policy.WithOrigins("http://localhost:4321")
+        policy.WithOrigins(
+                  "http://localhost:4321",      // Client dev server
+                  "https://localhost:7001")     // Service origin (for Swagger UI testing)
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -154,6 +156,7 @@ app.UseHttpsRedirection();
 
 // Map API endpoints
 app.MapUserEndpoints();
+app.MapAuditEndpoints();
 
 app.Run();
 

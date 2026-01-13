@@ -5,7 +5,6 @@ using Application.Features.Users.Queries;
 using Domain.Common;
 using Domain.Entities;
 using FluentValidation;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Api.Endpoints;
 
