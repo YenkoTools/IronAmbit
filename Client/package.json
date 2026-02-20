@@ -13,21 +13,24 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.12",
+    "@astrojs/mdx": "^4.3.13",
     "@astrojs/react": "^4.4.2",
     "@tailwindcss/vite": "^4.1.17",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.16.2",
+    "astro": "^5.17.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^6.15.0",
+    "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.0",
-    "eslint-plugin-astro": "^1.5.0",
+    "eslint-plugin-astro": "^1.6.0",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "overrides": {
+    "minimatch": "^10.2.1"
   }
 }
