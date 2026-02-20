@@ -1,0 +1,38 @@
+services:
+
+  # ── .NET 10 API ───────────────────────────────────────────────────────────
+  service:
+    build:
+      context: ./Service
+      dockerfile: Dockerfile
+    ports:
+      - "5025:5025"
+    environment:
+      # Use the Development profile for Swagger UI and SQLite defaults
+      ASPNETCORE_ENVIRONMENT: Development
+      # Bind to HTTP only (no HTTPS inside Docker)
+      ASPNETCORE_URLS: http://+:5025
+      # Override the database path to land in the named volume
+      ConnectionStrings__DefaultConnection: "Data Source=/data/ironambit.db"
+      ConnectionStrings__Provider: Sqlite
+      # Keep the DB path available to entrypoint.sh
+      DB_PATH: /data/ironambit.db
+    volumes:
+      - ironambit-db:/data
+
+  # ── Astro Client ──────────────────────────────────────────────────────────
+  client:
+    build:
+      context: ./Client
+      dockerfile: Dockerfile
+      args:
+        # The browser resolves this URL, so use localhost (not the Docker service name)
+        PUBLIC_API_URL: http://localhost:5025/api
+        PUBLIC_USE_MOCK_API: "false"
+    ports:
+      - "4321:4321"
+    depends_on:
+      - service
+
+volumes:
+  ironambit-db:
